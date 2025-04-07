@@ -1,0 +1,135 @@
+---
+// src/pages/examples/cta-sections/two-button.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import CTA from '../../../components/sections/CTA.astro';
+---
+
+<BaseLayout title="Two-Button CTA Example">
+    <Header slot="header"/>
+
+    <Hero
+        title="Two-Button CTA"
+        subtitle="Component Example"
+        description="A dual-action CTA with primary and secondary buttons for different user paths."
+        height="small"
+    />
+
+    <!-- Example CTA Section -->
+    <CTA
+        title="Ready to Experience the Difference?"
+        description="Choose the option that works best for you. Start with a free trial or schedule a personalized demo with our team."
+        buttons={[
+            {
+                text: "Start Free Trial",
+                href: "/trial",
+                variant: "primary"
+            },
+            {
+                text: "Schedule a Demo",
+                href: "/demo",
+                variant: "outline"
+            }
+        ]}
+        style="two-button"
+        backgroundColor="bg-gradient-to-r from-blue-700 to-blue-500 dark:from-blue-800 dark:to-blue-600"
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a dual-action CTA with primary and secondary buttons.
+                This approach gives users different pathways based on where they are in their customer journey.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Features:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>Two distinct buttons that cater to different user needs</li>
+                    <li>Visual hierarchy established through button styling (primary vs outline)</li>
+                    <li>Gradient background for added visual appeal</li>
+                    <li>Clear description that explains both options</li>
+                    <li>Responsive design that maintains button distinction at all screen sizes</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<CTASection
+    title="Ready to Experience the Difference?"
+    description="Choose the option that works best for you. Start with a free trial or schedule a personalized demo with our team."
+    buttons={[
+        {
+            text: "Start Free Trial",
+            href: "/trial",
+            variant: "primary"
+        },
+        {
+            text: "Schedule a Demo",
+            href: "/demo",
+            variant: "outline"
+        }
+    ]}
+    style="two-button"
+    backgroundColor="bg-gradient-to-r from-blue-700 to-blue-500 dark:from-blue-800 dark:to-blue-600"
+/>`}
+                </pre>
+            </div>
+
+            <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+                <p class="text-blue-800 dark:text-blue-200 text-sm">
+                    <strong>Best Practice:</strong> When using multiple buttons, make sure to establish a clear visual
+                    hierarchy. The primary action should be visually prominent, while secondary actions should be styled
+                    to be less dominant but still easily accessible.
+                </p>
+            </div>
+
+            <div
+                class="mt-8 p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-700">
+                <p class="text-purple-800 dark:text-purple-200 text-sm">
+                    <strong>Use Case Tip:</strong> This two-button approach works well when you want to cater to
+                    different audience segments in the same CTA. Common pairings include:
+                </p>
+                <ul class="list-disc ml-5 mt-2">
+                    <li>Free trial / Paid subscription</li>
+                    <li>Buy now / Learn more</li>
+                    <li>Sign up / Contact sales</li>
+                    <li>Get started / Watch demo</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/examples/cta-sections/newsletter"
+                   class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                    Previous: Newsletter Signup CTA
+                </a>
+                <a href="/examples/cta-sections"
+                   class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Back to All Examples
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer"/>
+</BaseLayout>

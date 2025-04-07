@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600">
+  <!-- Background base pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#bg-gradient)" />
+  
+  <!-- Grid pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#grid)" />
+  
+  <!-- Abstract shapes -->
+  <circle cx="200" cy="450" r="300" fill="rgba(255,255,255,0.03)" />
+  <circle cx="1000" cy="150" r="250" fill="rgba(255,255,255,0.05)" />
+  
+  <!-- Diagonal lines -->
+  <path d="M-100,800 L1300,-200" stroke="rgba(255,255,255,0.08)" stroke-width="40" />
+  <path d="M-100,900 L1300,-100" stroke="rgba(255,255,255,0.05)" stroke-width="60" />
+</svg>

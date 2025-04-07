@@ -1,0 +1,144 @@
+---
+// src/components/sections/CTASection.astro
+
+interface Button {
+    text: string;
+    href: string;
+    variant: 'primary' | 'secondary' | 'outline';
+    icon?: string;
+}
+
+export interface Props {
+    title: string;
+    subtitle?: string;
+    description?: string;
+    align?: 'left' | 'center' | 'right';
+    style?: 'simple' | 'background' | 'newsletter' | 'two-button';
+    backgroundImage?: string;
+    backgroundColor?: string;
+    buttons?: Button[];
+    newsletterPlaceholder?: string;
+    newsletterSubmitText?: string;
+    newsletterAction?: string;
+    className?: string;
+}
+
+const {
+    title,
+    subtitle,
+    description,
+    align = 'center',
+    style = 'simple',
+    backgroundImage,
+    backgroundColor = 'bg-blue-600 dark:bg-blue-700',
+    buttons = [],
+    newsletterPlaceholder = 'Enter your email',
+    newsletterSubmitText = 'Subscribe',
+    newsletterAction = '#',
+    className = '',
+} = Astro.props;
+
+// Configure alignment classes
+const alignmentClasses = {
+    left: 'text-left items-start',
+    center: 'text-center items-center',
+    right: 'text-right items-end',
+};
+
+// Configure button variants
+const buttonVariants = {
+    primary: 'bg-white text-blue-600 hover:bg-blue-50 focus:ring-white',
+    secondary: 'bg-blue-700 text-white hover:bg-blue-800 focus:ring-blue-500 dark:bg-blue-800 dark:hover:bg-blue-900',
+    outline: 'bg-transparent border border-white text-white hover:bg-white/10 focus:ring-white',
+};
+
+// Conditional background classes
+const backgroundClasses = backgroundImage
+    ? ''
+    : `${backgroundColor} text-white`;
+
+// If this is a newsletter style, ensure we have at least an empty array for buttons
+const showButtons = style !== 'newsletter' && buttons.length > 0;
+---
+
+<section class={`py-16 relative overflow-hidden ${backgroundClasses} ${className}`}>
+    {backgroundImage && (
+        <div class="absolute inset-0 z-0">
+            <img
+                src={backgroundImage}
+                alt=""
+                class="w-full h-full object-cover"
+                loading="lazy"
+                aria-hidden="true"
+            />
+            <div class="absolute inset-0 bg-blue-600/80 dark:bg-blue-700/80"></div>
+        </div>
+    )}
+
+    <div class={`container-custom relative z-10 ${alignmentClasses[align]}`}>
+        <div class={`flex flex-col ${alignmentClasses[align]} max-w-3xl mx-auto`}>
+            {subtitle && (
+                <span class="text-sm md:text-base uppercase tracking-wider font-medium mb-3 text-blue-100">
+                    {subtitle}
+                </span>
+            )}
+
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+                {title}
+            </h2>
+
+            {description && (
+                <p class="text-lg md:text-xl text-blue-50 mb-8 max-w-2xl">
+                    {description}
+                </p>
+            )}
+
+            {style === 'newsletter' && (
+                <form
+                    action={newsletterAction}
+                    method="post"
+                    class={`mt-4 sm:flex max-w-md ${align === 'center' ? 'mx-auto' : ''}`}
+                >
+                    <label for="email-address" class="sr-only">Email address</label>
+                    <input
+                        id="email-address"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        required
+                        class="w-full px-5 py-3 placeholder-gray-400 bg-white border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-700"
+                        placeholder={newsletterPlaceholder}
+                    />
+                    <div class="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+                        <button
+                            type="submit"
+                            class="w-full bg-blue-800 hover:bg-blue-900 px-5 py-3 text-white font-medium focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-700"
+                        >
+                            {newsletterSubmitText}
+                        </button>
+                    </div>
+                </form>
+                )}
+
+            {showButtons && (
+                <div
+                    class={`mt-8 flex flex-wrap gap-4 ${align === 'center' ? 'justify-center' : align === 'right' ? 'justify-end' : 'justify-start'}`}>
+                    {buttons.map((button) => (
+                        <a
+                            href={button.href}
+                            class={`inline-flex items-center justify-center rounded-md px-6 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors ${buttonVariants[button.variant]}`}
+                        >
+                            {button.text}
+                            {button.icon && (
+                                <span class="ml-2">
+                                    <span class="sr-only">Icon for {button.text}</span>
+                                    <Fragment set:html={button.icon}/>
+                                </span>
+                            )}
+                        </a>
+                    ))}
+                </div>
+            )}
+        </div>
+    </div>
+</section>

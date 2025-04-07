@@ -1,0 +1,111 @@
+---
+// src/pages/examples/cta-sections/background.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import CTA from '../../../components/sections/CTA.astro';
+---
+
+<BaseLayout title="Background Image CTA Example">
+    <Header slot="header" />
+
+    <Hero
+        title="Background Image CTA"
+        subtitle="Component Example"
+        description="A visually striking CTA with a background image and overlay."
+        height="small"
+    />
+
+    <!-- Example CTA Section -->
+    <CTA
+        title="Transform Your Online Presence"
+        subtitle="Limited Time Offer"
+        description="Get 30% off all premium plans when you sign up today. Upgrade your website with our professional tools and templates."
+        buttons={[
+            {
+                text: "Claim Your Discount",
+                href: "/pricing",
+                variant: "primary"
+            }
+        ]}
+        style="background"
+        backgroundImage="/images/cta-background.svg"
+        align="left"
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a CTA section with a background image and color overlay.
+                This style creates higher visual impact and can be used to highlight special offers or important calls to action.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Features:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>Eye-catching background image with semi-transparent overlay</li>
+                    <li>Left-aligned content for a different visual style</li>
+                    <li>Additional subtitle to highlight urgency or special offers</li>
+                    <li>High-contrast button for clear visibility against the background</li>
+                    <li>Works well for promotions, special events, or limited-time offers</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<CTASection
+    title="Transform Your Online Presence"
+    subtitle="Limited Time Offer"
+    description="Get 30% off all premium plans when you sign up today."
+    buttons={[
+        {
+            text: "Claim Your Discount",
+            href: "/pricing",
+            variant: "primary"
+        }
+    ]}
+    style="background"
+    backgroundImage="/images/cta-background.jpg"
+    align="left"
+/>`}
+                </pre>
+            </div>
+
+            <div class="mt-8 p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                <p class="text-yellow-800 dark:text-yellow-200 text-sm">
+                    <strong>Note:</strong> This example uses an SVG background image at "/images/cta-background.svg". You can replace this with a photographic image for a different look and feel.
+                </p>
+            </div>
+
+            <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+                <p class="text-blue-800 dark:text-blue-200 text-sm">
+                    <strong>Best Practice:</strong> When using background images, ensure they have enough contrast with the text overlay for readability. The semi-transparent colored overlay helps with this, but you should still choose images that won't compete with your text content.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/examples/cta-sections/simple" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Previous: Simple Button CTA
+                </a>
+                <a href="/examples/cta-sections/newsletter" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Next Example: Newsletter Signup CTA
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>

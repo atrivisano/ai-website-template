@@ -1,0 +1,112 @@
+---
+// src/pages/examples/cta-sections/simple.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import CTA from '../../../components/sections/CTA.astro';
+---
+
+<BaseLayout title="Simple Button CTA Example">
+    <Header slot="header"/>
+
+    <Hero
+        title="Simple Button CTA"
+        subtitle="Component Example"
+        description="A clean, focused CTA with a single prominent button."
+        height="small"
+    />
+
+    <!-- Example CTA Section -->
+    <CTA title="Ready to Get Started?"
+         description="Join thousands of satisfied customers who are already building amazing websites with our platform."
+         buttons={[
+             {
+                 text: "Start Your Free Trial",
+                 href: "/trial",
+                 variant: "primary",
+                 icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>'
+             }
+         ]}
+         style="simple"
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a simple, focused Call-to-Action section with a single button.
+                This style is ideal for primary conversion goals where you want to direct users toward one specific
+                action.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Features:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>Clean, focused design with minimal distractions</li>
+                    <li>Single, prominent button for clear user direction</li>
+                    <li>Contrasting button color for visual emphasis</li>
+                    <li>Concise, action-oriented copy</li>
+                    <li>Includes an arrow icon to suggest forward movement/progress</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<CTASection
+    title="Ready to Get Started?"
+    description="Join thousands of satisfied customers who are already building amazing websites with our platform."
+    buttons={[
+        {
+            text: "Start Your Free Trial",
+            href: "/trial",
+            variant: "primary",
+            icon: '<svg>...</svg>'
+        }
+    ]}
+    style="simple"
+/>`}
+                </pre>
+            </div>
+
+            <div
+                class="mt-8 p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                <p class="text-yellow-800 dark:text-yellow-200 text-sm">
+                    <strong>Pro Tip:</strong> For maximum effectiveness, keep your CTA message concise and compelling.
+                    Focus on the value proposition and use action-oriented language that creates a sense of urgency or
+                    clearly communicates the benefit of taking action.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/examples/cta-sections"
+                   class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                    Back to Examples
+                </a>
+                <a href="/examples/cta-sections/background"
+                   class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Next Example: Background Image CTA
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer"/>
+</BaseLayout>
