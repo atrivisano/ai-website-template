@@ -1,0 +1,52 @@
+---
+// src/pages/hero-examples/standard.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+---
+
+<BaseLayout title="Standard Hero Example">
+    <Header slot="header"/>
+
+    <Hero
+        title="Build faster websites with Astro"
+        subtitle="Modern Web Development"
+        description="Astro is the all-in-one web framework designed for speed. Pull your content from anywhere and deploy everywhere, all powered by your favorite UI components and libraries."
+        buttons={[
+            {
+                text: "Get Started",
+                href: "/docs",
+                variant: "primary"
+            },
+            {
+                text: "View on GitHub",
+                href: "https://github.com/withastro/astro",
+                variant: "outline"
+            }
+        ]}
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">Standard Hero Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a standard hero section with a title, subtitle, description, and multiple
+                call-to-action buttons.
+                The hero uses centered alignment, which is the default.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Features:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>Clean, centered layout</li>
+                    <li>Multiple CTA buttons with different styles</li>
+                    <li>Responsive typography</li>
+                    <li>Optimized for both light and dark mode</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer"/>
+</BaseLayout>

@@ -1,0 +1,127 @@
+---
+// src/components/sections/Hero.astro
+
+interface Button {
+    text: string;
+    href: string;
+    variant: 'primary' | 'secondary' | 'outline';
+    icon?: string;
+}
+
+export interface Props {
+    title: string;
+    subtitle?: string;
+    description?: string;
+    align?: 'left' | 'center' | 'right';
+    buttons?: Button[];
+    backgroundImage?: string;
+    overlay?: boolean;
+    contentWidth?: 'narrow' | 'medium' | 'wide' | 'full';
+    height?: 'small' | 'medium' | 'large' | 'full';
+    className?: string;
+}
+
+const {
+    title,
+    subtitle,
+    description,
+    align = 'center',
+    buttons = [],
+    backgroundImage,
+    overlay = true,
+    contentWidth = 'medium',
+    height = 'medium',
+    className = '',
+} = Astro.props;
+
+// Configure content alignment classes
+const alignmentClasses = {
+    left: 'text-left items-start',
+    center: 'text-center items-center',
+    right: 'text-right items-end',
+};
+
+// Configure content width classes
+const contentWidthClasses = {
+    narrow: 'max-w-3xl',
+    medium: 'max-w-5xl',
+    wide: 'max-w-7xl',
+    full: 'w-full',
+};
+
+// Configure height classes
+const heightClasses = {
+    small: 'min-h-[40vh] py-16',
+    medium: 'min-h-[60vh] py-20',
+    large: 'min-h-[80vh] py-24',
+    full: 'min-h-screen py-24',
+};
+
+// Configure button variants
+const buttonVariants = {
+    primary: 'bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500',
+    secondary: 'bg-gray-100 hover:bg-gray-200 text-gray-900 focus:ring-gray-500 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100',
+    outline: 'bg-transparent border border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-900/20',
+};
+
+// Combine classes directly
+const containerClasses = `relative flex flex-col justify-center ${heightClasses[height]} ${className}`;
+---
+
+<section class={containerClasses}>
+    {backgroundImage && (
+        <div class="absolute inset-0 z-0">
+            <img
+                src={backgroundImage}
+                alt=""
+                class="w-full h-full object-cover"
+                loading="eager"
+                fetchpriority="high"
+                aria-hidden="true"
+            />
+            {overlay && (
+                <div class="absolute inset-0 bg-black/50 dark:bg-black/60"></div>
+            )}
+        </div>
+    )}
+
+    <div class={`container-custom relative z-10 ${alignmentClasses[align]}`}>
+        <div class={`flex flex-col ${alignmentClasses[align]} ${contentWidthClasses[contentWidth]} mx-auto px-4`}>
+            {subtitle && (
+                <span
+                    class="text-sm md:text-base uppercase tracking-wider font-medium mb-3 text-blue-600 dark:text-blue-400">
+                    {subtitle}
+                </span>
+            )}
+
+            <h1 class={`text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight ${backgroundImage ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
+                {title}
+            </h1>
+
+            {description && (
+                <p class={`mt-6 text-lg md:text-xl max-w-3xl ${backgroundImage ? 'text-gray-200' : 'text-gray-600 dark:text-gray-300'}`}>
+                    {description}
+                </p>
+            )}
+
+            {buttons.length > 0 && (
+                <div class={`mt-8 flex flex-wrap gap-4 ${align === 'center' ? 'justify-center' : align === 'right' ? 'justify-end' : 'justify-start'}`}>
+                    {buttons.map((button) => (
+                        <a
+                            href={button.href}
+                            class={`inline-flex items-center justify-center rounded-md px-6 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors ${buttonVariants[button.variant]}`}
+                        >
+                            {button.text}
+                            {button.icon && (
+                                <span class="ml-2">
+                        <span class="sr-only">Icon for {button.text}</span>
+                        <Fragment set:html={button.icon} />
+                    </span>
+                            )}
+                        </a>
+                    ))}
+                </div>
+            )}
+        </div>
+    </div>
+</section>
