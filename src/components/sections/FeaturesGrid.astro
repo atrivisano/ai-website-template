@@ -35,7 +35,7 @@ const {
 
 const columnConfig = {
     2: 'md:grid-cols-2',
-    3: 'md:grid-cols-3',
+    3: 'md:grid-cols-2 lg:grid-cols-3',
     4: 'md:grid-cols-2 lg:grid-cols-4',
 };
 
@@ -75,7 +75,7 @@ const sectionClasses = `py-16 md:py-24 ${withBackground ? 'bg-gray-50 dark:bg-gr
             {features.map(feature => (
                 <div class={`feature-item ${alignConfig[align]}`}>
                     {feature.icon && (
-                        <div class={`feature-icon ${align === 'center' ? 'mx-auto' : ''} mb-5`}>
+                        <div class={`feature-icon ${align === 'center' ? 'flex flex-col items-center' : ''} mb-5`}>
                             {feature.icon.startsWith('<') ? (
                                 // Render as inline SVG if it's an SVG string
                                 <div class="h-12 w-12 text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
