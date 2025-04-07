@@ -1,0 +1,117 @@
+---
+// src/pages/features-grid-examples/compact.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import FeaturesGrid from '../../../components/sections/FeaturesGrid.astro';
+
+// Sample feature data - more concise for compact layout
+const compactFeatures = [
+    {
+        title: "Intuitive Interface",
+        description: "Clean, modern design that's easy to use.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>'
+    },
+    {
+        title: "Highly Customizable",
+        description: "Tailor every aspect to your needs.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>'
+    },
+    {
+        title: "Cloud Storage",
+        description: "All your data securely in the cloud.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>'
+    },
+    {
+        title: "Global CDN",
+        description: "Fast delivery anywhere in the world.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>'
+    }
+]
+---
+
+<BaseLayout title="Compact Features Grid Example">
+    <Header slot="header" />
+
+    <Hero
+        title="Compact Features Grid"
+        subtitle="Component Example"
+        description="A 4-column layout highlighting multiple features with concise descriptions."
+        height="small"
+    />
+
+    <!-- Example Features Grid -->
+    <FeaturesGrid
+        title="At a Glance"
+        features={compactFeatures}
+        columns={4}
+        align="center"
+        withBackground={true}
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a compact 4-column layout of the Features Grid component.
+                This configuration is perfect for showcasing multiple features with brief descriptions,
+                creating a clean overview of your product's capabilities.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Characteristics:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>4-column grid that displays as 2 columns on tablets and 1 column on mobile</li>
+                    <li>Concise descriptions that communicate key benefits quickly</li>
+                    <li>No links to keep the focus on the feature overview</li>
+                    <li>Centered alignment for a clean, balanced look</li>
+                    <li>Minimal header with just a title (no subtitle or description)</li>
+                    <li>Light background for subtle section separation</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<FeaturesGrid
+    title="At a Glance"
+    features={compactFeatures}
+    columns={4}
+    align="center"
+    withBackground={true}
+/>`}
+                </pre>
+            </div>
+
+            <div class="mt-10 p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                <p class="text-yellow-800 dark:text-yellow-200 text-sm">
+                    <strong>Pro Tip:</strong> The compact layout works best when you have many features to showcase but want to
+                    avoid overwhelming the user with text. Focus on brief, impactful descriptions that communicate the key
+                    benefit of each feature in just one sentence.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/features-grid-examples/left-aligned" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Previous: Left-Aligned Layout
+                </a>
+                <a href="/features-grid-examples" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Back to All Examples
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>

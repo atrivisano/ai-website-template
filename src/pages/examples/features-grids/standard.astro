@@ -1,0 +1,119 @@
+---
+// src/pages/features-grid-examples/standard.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import FeaturesGrid from '../../../components/sections/FeaturesGrid.astro';
+
+// Sample feature data
+const features = [
+    {
+        title: "Lightning Fast Performance",
+        description: "Astro sites load incredibly fast because they ship zero JavaScript by default, and only hydrate interactive components when necessary.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>',
+        link: {
+            text: "Learn about performance",
+            url: "/performance"
+        }
+    },
+    {
+        title: "Component Islands",
+        description: "Use your favorite component frameworks like React, Vue, Svelte, Solid, Preact, or just plain HTML + JS, all in the same project.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>',
+        link: {
+            text: "View islands documentation",
+            url: "/islands"
+        }
+    },
+    {
+        title: "Content-Focused",
+        description: "Pull content from any source including Markdown, MDX, CMS, APIs, databases, or fetch from anywhere at build or runtime.",
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>',
+        link: {
+            text: "Explore content options",
+            url: "/content"
+        }
+    },
+]
+---
+
+<BaseLayout title="Standard Features Grid Example">
+    <Header slot="header" />
+
+    <Hero
+        title="Standard Features Grid"
+        subtitle="Component Example"
+        description="A flexible 3-column layout with icons and optional links."
+        height="small"
+    />
+
+    <!-- Example Features Grid -->
+    <FeaturesGrid
+        title="Why Choose Astro"
+        subtitle="Key Benefits"
+        description="Astro is the all-in-one web framework designed for speed. Pull your content from anywhere and deploy everywhere."
+        features={features}
+        columns={3}
+        align="center"
+        withBackground={true}
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates the standard 3-column layout of the Features Grid component.
+                This configuration is perfect for highlighting 3-6 main features of your product or service.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Characteristics:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>3-column grid layout that stacks on mobile</li>
+                    <li>Centered alignment for a balanced appearance</li>
+                    <li>Icons with colored backgrounds</li>
+                    <li>Descriptive text with optional links</li>
+                    <li>Light gray background for visual separation</li>
+                    <li>Full section header with title, subtitle, and description</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<FeaturesGrid
+    title="Why Choose Astro"
+    subtitle="Key Benefits"
+    description="Astro is the all-in-one web framework designed for speed."
+    features={features}
+    columns={3}
+    align="center"
+    withBackground={true}
+/>`}
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/features-grid-examples" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Back to Examples
+                </a>
+                <a href="/features-grid-examples/left-aligned" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Next Example: Left-Aligned
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>
