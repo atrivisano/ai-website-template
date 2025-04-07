@@ -202,5 +202,91 @@ import Hero from "../../components/sections/Hero.astro";
         </div>
     </section>
 
+    <section class="py-16">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto mb-12 text-center">
+                <h2 class="text-3xl font-bold mb-4">Showcase Customer Experiences</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400">
+                    Testimonials are powerful social proof elements that can significantly boost your website's credibility.
+                    Below are various testimonial layouts you can use to highlight customer experiences.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonials Grid Card -->
+                <a href="/examples/testimonials/grid" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-blue-100 dark:bg-blue-900 flex items-center justify-center p-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Testimonials Grid</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A classic 3-column layout displaying multiple testimonials with ratings and author information.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Featured Testimonial Card -->
+                <a href="/examples/testimonials/featured" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center p-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Featured Testimonial</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Prominently display a single high-impact testimonial with larger text for maximum effectiveness.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Testimonial Carousel Card -->
+                <a href="/examples/testimonials/carousel" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-green-100 dark:bg-green-900 flex items-center justify-center p-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Testimonial Carousel</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            An interactive slider that allows users to browse through multiple testimonials in a space-efficient format.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Quote-Focused Card -->
+                <a href="/examples/testimonials/quotes" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-purple-100 dark:bg-purple-900 flex items-center justify-center p-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Quote-Focused Testimonials</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A minimalist design with prominent quotation marks that emphasizes the testimonial content.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <Footer slot="footer" />
 </BaseLayout>

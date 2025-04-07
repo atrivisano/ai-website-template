@@ -1,0 +1,128 @@
+---
+// src/pages/examples/testimonials/quotes.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import Testimonials from '../../../components/sections/Testimonials.astro';
+
+// Sample testimonials data for quotes style
+const quotesTestimonials = [
+    {
+        content: "This platform revolutionized how we approach web development. The speed and flexibility allowed us to launch in half the time.",
+        author: {
+            name: "James Wilson",
+            title: "CTO",
+            company: "TechStart Inc."
+        }
+    },
+    {
+        content: "Our conversion rate increased by 40% after migrating to this solution. The performance benefits alone were worth the switch.",
+        author: {
+            name: "Lisa Chen",
+            title: "Digital Marketing Lead",
+            company: "Growth Partners"
+        }
+    },
+    {
+        content: "The balance of performance and design flexibility is unmatched. We've finally found a platform that doesn't compromise either.",
+        author: {
+            name: "Marcus Patel",
+            title: "Creative Director",
+            company: "Design Collective"
+        }
+    }
+]
+---
+
+<BaseLayout title="Quote-Focused Testimonials Example">
+    <Header slot="header" />
+
+    <Hero
+        title="Quote-Focused Testimonials"
+        subtitle="Component Example"
+        description="A clean, typography-centered approach to highlighting customer quotes."
+        height="small"
+    />
+
+    <!-- Example Quote-Focused Testimonials -->
+    <Testimonials
+        title="In Their Words"
+        description="Straight from our customers - read what they have to say about their experience."
+        testimonials={quotesTestimonials}
+        style="quotes"
+        columns={3}
+        withBackground={true}
+        withRatings={false}
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a quote-focused layout for testimonials, emphasizing the words of your customers with prominent quotation marks.
+                This style creates a clean, elegant presentation that draws attention to the testimonial content.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Features:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>Large, decorative quotation marks to highlight testimonial content</li>
+                    <li>Clean, centered layout with emphasis on typography</li>
+                    <li>No card containers or ratings for a more minimalist approach</li>
+                    <li>Author information displayed beneath each quote</li>
+                    <li>Works well for concise, impactful quotes</li>
+                    <li>Adapts to any number of columns based on your needs</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<Testimonials
+    title="In Their Words"
+    description="Straight from our customers - read what they have to say about their experience."
+    testimonials={quotesTestimonials}
+    style="quotes"
+    columns={3}
+    withBackground={true}
+    withRatings={false}
+/>`}
+                </pre>
+            </div>
+
+            <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+                <p class="text-blue-800 dark:text-blue-200 text-sm">
+                    <strong>Design Tip:</strong> The quote-focused style works best with concise testimonials that deliver a strong message in a few sentences. For this layout, try to keep quotes brief and impactful, focusing on specific benefits or results.
+                </p>
+            </div>
+
+            <div class="mt-8 p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-700">
+                <p class="text-purple-800 dark:text-purple-200 text-sm">
+                    <strong>Variation Idea:</strong> For a more visual approach, you could modify this style to include company logos alongside or instead of the author information. This works especially well for B2B services or when featuring well-known brands.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/examples/testimonials/carousel" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Previous: Testimonial Carousel
+                </a>
+                <a href="/examples/testimonials" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Back to All Examples
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>

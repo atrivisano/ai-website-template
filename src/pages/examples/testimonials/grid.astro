@@ -1,0 +1,129 @@
+---
+// src/pages/examples/testimonials/grid.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import Testimonials from '../../../components/sections/Testimonials.astro';
+
+// Sample testimonials data
+const testimonials = [
+    {
+        content: "This platform completely transformed our online presence. The speed and ease of use are outstanding, and customer support is always responsive and helpful.",
+        author: {
+            name: "Sarah Johnson",
+            title: "Marketing Director",
+            company: "Tech Innovations",
+            initials: "SJ"
+        },
+        rating: 5
+    },
+    {
+        content: "We switched from another platform and couldn't be happier. The website loads incredibly fast, and we've seen a 40% increase in conversions since the migration.",
+        author: {
+            name: "David Chen",
+            title: "E-commerce Manager",
+            company: "Retail Solutions",
+            initials: "DC"
+        },
+        rating: 5
+    },
+    {
+        content: "The design flexibility combined with performance optimization is exactly what we needed. Our team was able to build and launch our site in half the time we expected.",
+        author: {
+            name: "Emily Rodriguez",
+            title: "Creative Director",
+            company: "Design Studio",
+            initials: "ER"
+        },
+        rating: 4
+    },
+]
+---
+
+<BaseLayout title="Testimonials Grid Example">
+    <Header slot="header" />
+
+    <Hero
+        title="Testimonials Grid"
+        subtitle="Component Example"
+        description="A 3-column grid layout featuring customer testimonials with ratings and author information."
+        height="small"
+    />
+
+    <!-- Example Testimonials Grid -->
+    <Testimonials
+        title="What Our Customers Say"
+        description="Don't just take our word for it. Here's what some of our satisfied customers have to say about our platform."
+        testimonials={testimonials}
+        style="grid"
+        columns={3}
+        withBackground={true}
+        withCards={true}
+        withRatings={true}
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a standard grid layout for testimonials, showcasing multiple customer reviews in a structured format.
+                This approach is ideal for displaying a collection of testimonials with equal emphasis.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Features:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>3-column responsive grid that adapts to smaller screens</li>
+                    <li>Card-based design with subtle shadows for visual distinction</li>
+                    <li>Star ratings to highlight customer satisfaction</li>
+                    <li>Author information with initials or profile image</li>
+                    <li>Light background color to separate the section from surrounding content</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<Testimonials
+    title="What Our Customers Say"
+    description="Don't just take our word for it. Here's what some of our satisfied customers have to say about our platform."
+    testimonials={testimonials}
+    style="grid"
+    columns={3}
+    withBackground={true}
+    withCards={true}
+    withRatings={true}
+/>`}
+                </pre>
+            </div>
+
+            <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+                <p class="text-blue-800 dark:text-blue-200 text-sm">
+                    <strong>Best Practice:</strong> When using the grid layout, keep testimonial content concise for better readability. For longer testimonials, consider using the featured layout or reducing the number of columns.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/examples/testimonials" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Back to Examples
+                </a>
+                <a href="/examples/testimonials/featured" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Next Example: Featured Testimonial
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>

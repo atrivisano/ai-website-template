@@ -1,0 +1,114 @@
+---
+// src/pages/examples/testimonials/featured.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import Testimonials from '../../../components/sections/Testimonials.astro';
+
+// Sample featured testimonial
+const featuredTestimonial = [
+    {
+        content: "We've been using this platform for our entire product line and have seen remarkable results. The combination of performance optimization and design flexibility has helped us increase our conversion rate by 37% in just three months. The customer support team has been exceptional, always going above and beyond to help us achieve our goals. I can't recommend this solution enough for any serious e-commerce business looking to scale.",
+        author: {
+            name: "Michael Thompson",
+            title: "Chief Digital Officer",
+            company: "Global Retail Brands",
+            initials: "MT"
+        },
+        rating: 5
+    }
+]
+---
+
+<BaseLayout title="Featured Testimonial Example">
+    <Header slot="header" />
+
+    <Hero
+        title="Featured Testimonial"
+        subtitle="Component Example"
+        description="A highlighted single testimonial for maximum impact."
+        height="small"
+    />
+
+    <!-- Example Featured Testimonial -->
+    <Testimonials
+        title="Customer Success Story"
+        description="See how our platform has transformed businesses like yours."
+        testimonials={featuredTestimonial}
+        style="featured"
+        withBackground={true}
+        withCards={true}
+        withRatings={true}
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a featured testimonial layout that highlights a single, high-impact customer story.
+                This approach is perfect for showcasing your most compelling testimonial or a success story from a prominent client.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Features:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>Centered, prominent display of a single testimonial</li>
+                    <li>Larger text size for increased readability and impact</li>
+                    <li>Card container with ample padding for visual emphasis</li>
+                    <li>Star rating to highlight customer satisfaction</li>
+                    <li>Author information with name, title, and company</li>
+                    <li>Maximum width constraint for optimal reading experience</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<Testimonials
+    title="Customer Success Story"
+    description="See how our platform has transformed businesses like yours."
+    testimonials={featuredTestimonial}
+    style="featured"
+    withBackground={true}
+    withCards={true}
+    withRatings={true}
+/>`}
+                </pre>
+            </div>
+
+            <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+                <p class="text-blue-800 dark:text-blue-200 text-sm">
+                    <strong>Best Practice:</strong> For featured testimonials, choose content that tells a complete story with specific results or metrics when possible. This makes the testimonial more credible and impactful. Also, consider using a testimonial from a client whose industry or challenges align with your target audience.
+                </p>
+            </div>
+
+            <div class="mt-8 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-700">
+                <p class="text-green-800 dark:text-green-200 text-sm">
+                    <strong>Pro Tip:</strong> You can enhance the featured testimonial's impact by adding a complementary CTA below it, encouraging prospects to take the next step after reading the success story.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/examples/testimonials/grid" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Previous: Testimonials Grid
+                </a>
+                <a href="/examples/testimonials/carousel" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Next Example: Testimonial Carousel
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>
