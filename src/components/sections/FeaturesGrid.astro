@@ -1,0 +1,128 @@
+---
+// src/components/sections/FeaturesGrid.astro
+
+interface Feature {
+    title: string;
+    description: string;
+    icon?: string;  // SVG string or path to image
+    link?: {
+        text: string;
+        url: string;
+    };
+}
+
+export interface Props {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    features: Feature[];
+    columns?: 2 | 3 | 4;
+    align?: 'left' | 'center';
+    withBackground?: boolean;
+    className?: string;
+}
+
+const {
+    title,
+    subtitle,
+    description,
+    features,
+    columns = 3,
+    align = 'center',
+    withBackground = false,
+    className = '',
+} = Astro.props;
+
+const columnConfig = {
+    2: 'md:grid-cols-2',
+    3: 'md:grid-cols-3',
+    4: 'md:grid-cols-2 lg:grid-cols-4',
+};
+
+const alignConfig = {
+    left: 'text-left',
+    center: 'text-center',
+};
+
+const sectionClasses = `py-16 md:py-24 ${withBackground ? 'bg-gray-50 dark:bg-gray-800' : ''} ${className}`;
+---
+
+<section class={sectionClasses}>
+    <div class="container-custom">
+        {(title || subtitle || description) && (
+            <div class={`max-w-3xl mx-auto mb-12 ${alignConfig[align]} ${align === 'center' ? 'mx-auto' : ''}`}>
+                {subtitle && (
+                    <span class="text-sm md:text-base uppercase tracking-wider font-medium mb-3 block text-blue-600 dark:text-blue-400">
+                        {subtitle}
+                    </span>
+                )}
+
+                {title && (
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        {title}
+                    </h2>
+                )}
+
+                {description && (
+                    <p class="text-lg text-gray-600 dark:text-gray-300">
+                        {description}
+                    </p>
+                )}
+            </div>
+        )}
+
+        <div class={`grid grid-cols-1 ${columnConfig[columns]} gap-8 md:gap-12`}>
+            {features.map(feature => (
+                <div class={`feature-item ${alignConfig[align]}`}>
+                    {feature.icon && (
+                        <div class={`feature-icon ${align === 'center' ? 'mx-auto' : ''} mb-5`}>
+                            {feature.icon.startsWith('<') ? (
+                                // Render as inline SVG if it's an SVG string
+                                <div class="h-12 w-12 text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                    <Fragment set:html={feature.icon} />
+                                </div>
+                            ) : (
+                                // Render as image if it's a path
+                                <img
+                                    src={feature.icon}
+                                    alt=""
+                                    class="h-12 w-12 object-contain"
+                                    aria-hidden="true"
+                                />
+                            )}
+                        </div>
+                    )}
+
+                    <h3 class="text-xl font-bold mb-3">
+                        {feature.title}
+                    </h3>
+
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        {feature.description}
+                    </p>
+
+                    {feature.link && (
+                        <a
+                            href={feature.link.url}
+                            class="inline-flex items-center font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                        >
+                            {feature.link.text}
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="ml-1 h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                        </a>
+                    )}
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
