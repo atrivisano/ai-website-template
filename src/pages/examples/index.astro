@@ -1,0 +1,133 @@
+---
+// src/pages/hero-examples/index.astro
+import BaseLayout from '../../layouts/Layout.astro';
+import Header from '../../components/common/Header.astro';
+import Footer from '../../components/common/Footer.astro';
+import Hero from "../../components/sections/Hero.astro";
+---
+
+<BaseLayout title="Hero Section Examples">
+    <Header slot="header" />
+
+    <Hero
+        title="Examples"
+        description="Have questions? We're here to help you with anything you need."
+        height="small"
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="mb-8">Hero Section Examples</h2>
+            <p class="mb-12 max-w-3xl">
+                This page showcases different variations of the Hero component.
+                Each example demonstrates different configuration options and use cases.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Standard Hero Card -->
+                <a href="/examples/heros/standard" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-blue-100 dark:bg-blue-900 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-300">Standard Hero</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A classic hero section with title, subtitle, description, and multiple CTA buttons.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Background Image Hero Card -->
+                <a href="/examples/heros/with-background" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-white">Background Hero</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A visually striking hero with a background image, overlay, and left-aligned content.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Minimal Hero Card -->
+                <a href="/examples/heros/minimal" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Minimal Hero</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A simplified hero with minimal content, perfect for secondary pages.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="mb-8">Features Grid Examples</h2>
+            <p class="mb-12 max-w-3xl">
+                Explore the different ways you can configure the Features Grid component
+                to showcase your product features, services, or team members.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Standard Features Grid Card -->
+                <a href="/examples/features-grids/standard" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-blue-100 dark:bg-blue-900 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-300">Standard 3-Column</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A classic features grid with 3 columns, centered content, and full descriptions.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Left-Aligned Features Grid Card -->
+                <a href="/examples/features-grids/left-aligned" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Left-Aligned 2-Column</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A two-column grid with left-aligned text and CTA links for each feature.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Compact Features Grid Card -->
+                <a href="/examples/features-grids/compact" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-white">Compact 4-Column</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A compact 4-column layout with minimal descriptions, perfect for highlighting many features.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>
