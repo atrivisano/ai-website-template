@@ -1,0 +1,82 @@
+---
+/**
+    * PricingToggle Component
+    * A toggle switch for selecting between monthly and annual billing cycles
+    */
+
+export interface Props {
+    discountPercentage?: number;
+    className?: string;
+}
+
+const {
+    discountPercentage = 20,
+    className = '',
+} = Astro.props;
+---
+
+<div class={`pricing-toggle inline-flex items-center bg-gray-100 dark:bg-gray-700 rounded-full p-1 ${className}`}>
+    <button
+        class="pricing-toggle-option monthly px-4 py-2 text-sm font-medium rounded-full bg-white dark:bg-gray-600 shadow-sm"
+        data-period="monthly"
+        aria-pressed="true"
+    >
+        Monthly
+    </button>
+    <button
+        class="pricing-toggle-option annual px-4 py-2 text-sm font-medium rounded-full text-gray-700 dark:text-gray-300"
+        data-period="annual"
+        aria-pressed="false"
+    >
+        Annual
+        {discountPercentage > 0 &&
+            <span class="text-green-500 dark:text-green-400 ml-1">-{discountPercentage}%</span>
+        }
+    </button>
+</div>
+
+<script>
+    function initPricingToggle() {
+        const toggles = document.querySelectorAll('.pricing-toggle');
+
+        toggles.forEach(toggle => {
+            const monthlyBtn = toggle.querySelector('[data-period="monthly"]');
+            const annualBtn = toggle.querySelector('[data-period="annual"]');
+
+            if (!monthlyBtn || !annualBtn) return;
+
+            const updateToggleState = (period) => {
+                // Update toggle button states
+                monthlyBtn.setAttribute('aria-pressed', period === 'monthly');
+                annualBtn.setAttribute('aria-pressed', period === 'annual');
+
+                if (period === 'monthly') {
+                    monthlyBtn.classList.add('bg-white', 'dark:bg-gray-600', 'shadow-sm');
+                    monthlyBtn.classList.remove('text-gray-700', 'dark:text-gray-300');
+
+                    annualBtn.classList.remove('bg-white', 'dark:bg-gray-600', 'shadow-sm');
+                    annualBtn.classList.add('text-gray-700', 'dark:text-gray-300');
+                } else {
+                    annualBtn.classList.add('bg-white', 'dark:bg-gray-600', 'shadow-sm');
+                    annualBtn.classList.remove('text-gray-700', 'dark:text-gray-300');
+
+                    monthlyBtn.classList.remove('bg-white', 'dark:bg-gray-600', 'shadow-sm');
+                    monthlyBtn.classList.add('text-gray-700', 'dark:text-gray-300');
+                }
+
+                // Dispatch a custom event that can be listened to by price elements
+                document.dispatchEvent(new CustomEvent('pricingPeriodChange', {
+                    detail: { period }
+                }));
+            };
+
+            // Set up click handlers
+            monthlyBtn.addEventListener('click', () => updateToggleState('monthly'));
+            annualBtn.addEventListener('click', () => updateToggleState('annual'));
+        });
+    }
+
+    // Initialize on load and after navigation
+    document.addEventListener('DOMContentLoaded', initPricingToggle);
+    document.addEventListener('astro:page-load', initPricingToggle);
+</script>

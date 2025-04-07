@@ -1,0 +1,102 @@
+---
+/**
+    * PricingPrice Component
+    * Displays the price with monthly/annual toggle support
+    */
+
+export interface Props {
+    monthlyPrice: string | number;
+    annualPrice: string | number;
+    colorScheme?: 'default' | 'inverted';
+    size?: 'default' | 'large' | 'small';
+    className?: string;
+}
+
+const {
+    monthlyPrice,
+    annualPrice,
+    colorScheme = 'default',
+    size = 'default',
+    className = ''
+} = Astro.props;
+
+// Format price if it's a number
+const formatPrice = (price: string | number) => {
+    if (typeof price === 'number') {
+        return `$${price.toFixed(2)}`;
+    }
+    return price;
+};
+
+// Handle different size classes
+const sizeClasses = {
+    default: 'text-4xl',
+    large: 'text-5xl',
+    small: 'text-3xl'
+};
+
+// Handle different color schemes
+const colorClasses = {
+    default: 'text-gray-900 dark:text-white',
+    inverted: 'text-white'
+};
+
+// Period text color classes
+const periodColorClasses = {
+    default: 'text-gray-500 dark:text-gray-400',
+    inverted: 'text-blue-100'
+};
+---
+
+<div class={`price-container ${className}`}>
+    <div class="flex items-baseline">
+        <span
+            class={`font-bold pricing-price ${sizeClasses[size]} ${colorClasses[colorScheme]}`}
+            data-monthly={formatPrice(monthlyPrice)}
+            data-annual={formatPrice(annualPrice)}
+        >
+            {formatPrice(monthlyPrice)}
+        </span>
+        <span class={`ml-2 ${periodColorClasses[colorScheme]}`}>/month</span>
+    </div>
+    <p
+        class={`text-sm mt-1 pricing-period ${periodColorClasses[colorScheme]}`}
+        data-monthly="Billed monthly"
+        data-annual="Billed annually"
+    >
+        Billed monthly
+    </p>
+</div>
+
+<script>
+    function initPricingPrices() {
+        // Listen for pricing period change events
+        document.addEventListener('pricingPeriodChange', (event) => {
+            const { period } = event.detail;
+
+            // Update all pricing elements
+            document.querySelectorAll('.pricing-price').forEach(priceElement => {
+                const monthlyPrice = priceElement.getAttribute('data-monthly');
+                const annualPrice = priceElement.getAttribute('data-annual');
+
+                priceElement.textContent = period === 'monthly'
+                    ? monthlyPrice
+                    : annualPrice;
+            });
+
+            // Update all period text elements
+            document.querySelectorAll('.pricing-period').forEach(periodElement => {
+                const monthlyText = periodElement.getAttribute('data-monthly');
+                const annualText = periodElement.getAttribute('data-annual');
+
+                periodElement.textContent = period === 'monthly'
+                    ? monthlyText
+                    : annualText;
+            });
+        });
+    }
+
+    // Initialize on load and after navigation
+    document.addEventListener('DOMContentLoaded', initPricingPrices);
+    document.addEventListener('astro:page-load', initPricingPrices);
+</script>

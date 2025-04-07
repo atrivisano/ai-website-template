@@ -1,0 +1,82 @@
+---
+/**
+    * PricingTierStandard Component
+    * Standard card layout for a pricing tier
+    */
+
+import PricingFeature from './PricingFeature.astro';
+import PricingPrice from './PricingPrice.astro';
+
+export interface PricingFeatureItem {
+    text: string;
+    included: boolean;
+}
+
+export interface Props {
+    name: string;
+    description?: string;
+    monthlyPrice: string | number;
+    annualPrice: string | number;
+    features: PricingFeatureItem[];
+    ctaText: string;
+    ctaHref: string;
+    isPopular?: boolean;
+    badge?: string;
+    className?: string;
+}
+
+const {
+    name,
+    description,
+    monthlyPrice,
+    annualPrice,
+    features,
+    ctaText,
+    ctaHref,
+    isPopular = false,
+    badge,
+    className = ''
+} = Astro.props;
+---
+
+<div
+    class={`pricing-tier flex flex-col h-full rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700 ${isPopular ? 'relative md:scale-105 z-10' : ''} ${className}`}>
+    {badge && (
+        <div
+            class="bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-200 text-xs font-bold uppercase tracking-wider py-2 text-center">
+            {badge}
+        </div>
+    )}
+    <div class="p-6 md:p-8 bg-white dark:bg-gray-900 flex-grow">
+        <h3 class="text-xl font-bold mb-2">{name}</h3>
+        {description && (
+            <p class="text-gray-500 dark:text-gray-400 mb-4">{description}</p>
+        )}
+        <div class="my-6">
+            <PricingPrice
+                monthlyPrice={monthlyPrice}
+                annualPrice={annualPrice}
+            />
+        </div>
+        <ul class="space-y-4 mb-8">
+            {features.map((feature) => (
+                <PricingFeature
+                    text={feature.text}
+                    included={feature.included}
+                />
+            ))}
+        </ul>
+    </div>
+    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+        <a
+            href={ctaHref}
+            class={`block w-full py-3 px-6 rounded-md text-center font-medium ${
+                isPopular
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                    : 'bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-600'
+            }`}
+        >
+            {ctaText}
+        </a>
+    </div>
+</div>

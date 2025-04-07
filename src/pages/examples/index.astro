@@ -288,5 +288,77 @@ import Hero from "../../components/sections/Hero.astro";
         </div>
     </section>
 
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-8">Pricing Table Layouts</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-12 max-w-3xl">
+                Explore different pricing table layouts that can help you effectively communicate your pricing
+                strategy and drive conversions. Each example demonstrates a different approach to presenting pricing information.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Standard Pricing Table Card -->
+                <a href="/examples/pricing/standard" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-blue-100 dark:bg-blue-900 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-blue-600 dark:text-blue-300">Standard 3-Column</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A classic three-column pricing table with monthly/annual toggle, feature lists, and highlighted popular plan.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Feature Comparison Table Card -->
+                <a href="/examples/pricing/comparison" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Feature Comparison</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A detailed feature-by-feature comparison table that clearly shows what's included in each plan.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Horizontal Pricing Table Card -->
+                <a href="/examples/pricing/horizontal" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-indigo-600 dark:text-indigo-300">Horizontal Layout</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            A space-efficient horizontal pricing layout where each tier is presented in a row rather than a column.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Modern Pricing Cards Card -->
+                <a href="/examples/pricing/cards" class="card group hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-blue-600 to-indigo-600 flex items-center justify-center p-6">
+                        <h3 class="text-2xl font-bold text-white">Modern Cards</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Visually striking pricing cards with gradient backgrounds, hover effects, and modern styling.
+                        </p>
+                        <span class="text-blue-600 dark:text-blue-400 font-medium group-hover:underline">
+                            View Example →
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <Footer slot="footer" />
 </BaseLayout>

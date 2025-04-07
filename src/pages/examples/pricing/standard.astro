@@ -1,0 +1,168 @@
+---
+// src/pages/examples/pricing/standard.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import Pricing from '../../../components/sections/Pricing.astro';
+
+// Sample pricing data
+const pricingTiers = [
+    {
+        name: "Starter",
+        description: "Perfect for individuals and small projects",
+        price: {
+            monthly: 12,
+            annual: 9.6,  // 20% discount
+        },
+        features: [
+            { text: "Up to 5 projects", included: true },
+            { text: "Up to 10,000 subscribers", included: true },
+            { text: "Basic analytics", included: true },
+            { text: "48-hour support response time", included: true },
+            { text: "Custom domain", included: false },
+            { text: "Advanced analytics", included: false },
+            { text: "Priority support", included: false },
+        ],
+        cta: {
+            text: "Get started",
+            href: "/signup?plan=starter",
+        },
+    },
+    {
+        name: "Professional",
+        description: "For growing businesses and teams",
+        badge: "Most Popular",
+        price: {
+            monthly: 29,
+            annual: 23.2,  // 20% discount
+        },
+        features: [
+            { text: "Up to 15 projects", included: true },
+            { text: "Up to 100,000 subscribers", included: true },
+            { text: "Basic analytics", included: true },
+            { text: "24-hour support response time", included: true },
+            { text: "Custom domain", included: true },
+            { text: "Advanced analytics", included: true },
+            { text: "Priority support", included: false },
+        ],
+        cta: {
+            text: "Get started",
+            href: "/signup?plan=professional",
+        },
+        isPopular: true,
+    },
+    {
+        name: "Enterprise",
+        description: "For large organizations with complex needs",
+        price: {
+            monthly: 79,
+            annual: 63.2,  // 20% discount
+        },
+        features: [
+            { text: "Unlimited projects", included: true },
+            { text: "Unlimited subscribers", included: true },
+            { text: "Basic analytics", included: true },
+            { text: "4-hour support response time", included: true },
+            { text: "Custom domain", included: true },
+            { text: "Advanced analytics", included: true },
+            { text: "Priority support", included: true },
+        ],
+        cta: {
+            text: "Contact sales",
+            href: "/contact-sales",
+        },
+    },
+];
+---
+
+<BaseLayout title="Standard Pricing Table Example">
+    <Header slot="header" />
+
+    <Hero
+        title="Standard Pricing Table"
+        subtitle="Component Example"
+        description="A 3-column pricing table with monthly/annual toggle and feature lists."
+        height="small"
+    />
+
+    <!-- Example Pricing Table -->
+    <Pricing
+        title="Choose the plan that's right for you"
+        description="All plans come with a 14-day money-back guarantee. No contracts, cancel anytime."
+        tiers={pricingTiers}
+        style="standard"
+        enableToggle={true}
+        withBackground={true}
+        align="center"
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a standard 3-column pricing table with monthly/annual billing toggle.
+                This approach is ideal for showcasing different pricing tiers with progressive features.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Features:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>3-column responsive layout that stacks on mobile</li>
+                    <li>Monthly/annual billing toggle with discount</li>
+                    <li>Highlighted "popular" plan for recommendation</li>
+                    <li>Clear feature lists with visual indicators</li>
+                    <li>Distinct CTAs for each pricing tier</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<Pricing
+    title="Choose the plan that's right for you"
+    description="All plans come with a 14-day money-back guarantee."
+    tiers={pricingTiers}
+    style="standard"
+    enableToggle={true}
+    withBackground={true}
+    align="center"
+/>`}
+                </pre>
+            </div>
+
+            <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+                <p class="text-blue-800 dark:text-blue-200 text-sm">
+                    <strong>Best Practice:</strong> Make your pricing clear and transparent to build trust with potential customers. Clearly highlight key features that differentiate each tier, and use visual cues to guide users toward your recommended plan.
+                </p>
+            </div>
+
+            <div class="mt-8 p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-700">
+                <p class="text-green-800 dark:text-green-200 text-sm">
+                    <strong>Pro Tip:</strong> The monthly/annual toggle encourages longer commitments by highlighting the savings with annual billing. This can significantly improve customer lifetime value.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/examples/pricing" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Back to Examples
+                </a>
+                <a href="/examples/pricing/comparison" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Next Example: Feature Comparison Pricing
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>

@@ -1,0 +1,86 @@
+---
+/**
+    * PricingTierCard Component
+    * Modern card layout with gradient background for highlighted plans
+    */
+
+import PricingFeature from './PricingFeature.astro';
+import PricingPrice from './PricingPrice.astro';
+
+export interface PricingFeatureItem {
+    text: string;
+    included: boolean;
+}
+
+export interface Props {
+    name: string;
+    description?: string;
+    monthlyPrice: string | number;
+    annualPrice: string | number;
+    features: PricingFeatureItem[];
+    ctaText: string;
+    ctaHref: string;
+    isPopular?: boolean;
+    badge?: string;
+    className?: string;
+}
+
+const {
+    name,
+    description,
+    monthlyPrice,
+    annualPrice,
+    features,
+    ctaText,
+    ctaHref,
+    isPopular = false,
+    badge,
+    className = ''
+} = Astro.props;
+---
+
+<div
+    class={`pricing-tier h-full flex flex-col rounded-xl overflow-hidden transform transition-all duration-300 hover:translate-y-[-8px] hover:shadow-xl ${isPopular ? 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700'} ${className}`}>
+    <div class="p-6 md:p-8 flex-grow">
+        {badge && (
+            <div
+                class={`inline-block text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-full mb-3 ${isPopular ? 'bg-white/20 text-white' : 'bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-200'}`}>
+                {badge}
+            </div>
+        )}
+        <h3 class={`text-2xl font-bold mb-2 ${isPopular ? 'text-white' : ''}`}>{name}</h3>
+        {description && (
+            <p class={`mb-4 ${isPopular ? 'text-blue-100' : 'text-gray-500 dark:text-gray-400'}`}>{description}</p>
+        )}
+        <div class="my-6">
+            <PricingPrice
+                monthlyPrice={monthlyPrice}
+                annualPrice={annualPrice}
+                colorScheme={isPopular ? 'inverted' : 'default'}
+            />
+        </div>
+        <ul class="space-y-4 mb-8">
+            {features.map((feature) => (
+                <PricingFeature
+                    text={feature.text}
+                    included={feature.included}
+                    useColor={!isPopular}
+                    className={isPopular ? (feature.included ? 'text-blue-50' : 'text-blue-100 opacity-75') : ''}
+                />
+            ))}
+        </ul>
+    </div>
+    <div
+        class={`p-6 md:px-8 md:pb-8 ${isPopular ? 'border-t border-blue-500' : 'border-t border-gray-200 dark:border-gray-700'}`}>
+        <a
+            href={ctaHref}
+            class={`block w-full py-3 px-6 rounded-md text-center font-medium ${
+                isPopular
+                    ? 'bg-white hover:bg-gray-100 text-blue-600'
+                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+            }`}
+        >
+            {ctaText}
+        </a>
+    </div>
+</div>

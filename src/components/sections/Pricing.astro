@@ -1,0 +1,258 @@
+---
+// src/components/sections/Pricing.astro
+
+import PricingToggle from '../pricing/PricingToggle.astro';
+import PricingTierStandard from '../pricing/PricingTierStandard.astro';
+import PricingTierCard from '../pricing/PricingTierCard.astro';
+import PricingTierHorizontal from '../pricing/PricingTierHorizontal.astro';
+import PricingFeature from '../pricing/PricingFeature.astro';
+
+export interface PricingFeature {
+    text: string;
+    included: boolean;
+}
+
+export interface PricingTier {
+    name: string;
+    description?: string;
+    price: {
+        monthly: string | number;
+        annual: string | number;
+    };
+    features: PricingFeature[];
+    cta: {
+        text: string;
+        href: string;
+    };
+    isPopular?: boolean;
+    badge?: string;
+}
+
+export interface Props {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    tiers: PricingTier[];
+    style?: 'standard' | 'horizontal' | 'comparison' | 'cards';
+    enableToggle?: boolean;
+    withBackground?: boolean;
+    align?: 'left' | 'center';
+    className?: string;
+}
+
+const {
+    title = 'Simple, transparent pricing',
+    subtitle,
+    description = 'Choose the perfect plan for your needs.',
+    tiers = [],
+    style = 'standard',
+    enableToggle = true,
+    withBackground = true,
+    align = 'center',
+    className = '',
+} = Astro.props;
+
+// Set section background classes
+const sectionClasses = `py-16 md:py-24 ${withBackground ? 'bg-gray-50 dark:bg-gray-800' : ''} ${className}`;
+
+// Configure text alignment
+const alignmentClasses = {
+    left: 'text-left',
+    center: 'text-center',
+};
+---
+
+<section class={sectionClasses}>
+    <div class="container-custom">
+        <!-- Section Header -->
+        <div class={`max-w-3xl mx-auto mb-12 ${alignmentClasses[align]} ${align === 'center' ? 'mx-auto' : ''}`}>
+            {subtitle && (
+                <span
+                    class="text-sm md:text-base uppercase tracking-wider font-medium mb-3 block text-blue-600 dark:text-blue-400">
+                    {subtitle}
+                </span>
+            )}
+
+            {title && (
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    {title}
+                </h2>
+            )}
+
+            {description && (
+                <p class="text-lg text-gray-600 dark:text-gray-300">
+                    {description}
+                </p>
+            )}
+
+            {enableToggle && (
+                <div class="mt-8 flex justify-center gap-2">
+                    <PricingToggle/>
+                </div>
+            )}
+        </div>
+
+        {/* Standard 3-Column Pricing Layout */}
+        {style === 'standard' && (
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {tiers.map((tier) => (
+                    <PricingTierStandard
+                        name={tier.name}
+                        description={tier.description}
+                        monthlyPrice={tier.price.monthly}
+                        annualPrice={tier.price.annual}
+                        features={tier.features}
+                        ctaText={tier.cta.text}
+                        ctaHref={tier.cta.href}
+                        isPopular={tier.isPopular}
+                        badge={tier.badge}
+                    />
+                ))}
+            </div>
+        )}
+
+        {/* Horizontal Pricing Layout */}
+        {style === 'horizontal' && (
+            <div class="space-y-6">
+                {tiers.map((tier) => (
+                    <PricingTierHorizontal
+                        name={tier.name}
+                        description={tier.description}
+                        monthlyPrice={tier.price.monthly}
+                        annualPrice={tier.price.annual}
+                        features={tier.features}
+                        ctaText={tier.cta.text}
+                        ctaHref={tier.cta.href}
+                        isPopular={tier.isPopular}
+                        badge={tier.badge}
+                    />
+                ))}
+            </div>
+        )}
+
+        {/* Feature Comparison Layout */}
+        {style === 'comparison' && (
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white dark:bg-gray-900 rounded-lg shadow-sm overflow-hidden">
+                    <thead>
+                    <tr class="border-b border-gray-200 dark:border-gray-800">
+                        <th class="py-6 px-6 text-left"></th>
+                        {tiers.map((tier) => (
+                            <th class="py-6 px-6 text-left">
+                                <h3 class="text-xl font-bold">{tier.name}</h3>
+                                {tier.badge && (
+                                    <span
+                                        class="inline-block bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-200 text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-full mt-1">
+                                            {tier.badge}
+                                        </span>
+                                )}
+                            </th>
+                        ))}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="border-b border-gray-200 dark:border-gray-800">
+                        <td class="py-4 px-6 text-left font-medium">Pricing</td>
+                        {tiers.map((tier) => (
+                            <td class="py-4 px-6">
+                                <div class="flex items-baseline">
+                                        <span class="text-2xl font-bold text-gray-900 dark:text-white pricing-price"
+                                              data-monthly={tier.price.monthly} data-annual={tier.price.annual}>
+                                            {typeof tier.price.monthly === 'number' ? `$${tier.price.monthly.toFixed(2)}` : tier.price.monthly}
+                                        </span>
+                                    <span class="text-gray-500 dark:text-gray-400 ml-1">/month</span>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 pricing-period"
+                                   data-monthly="Billed monthly" data-annual="Billed annually">
+                                    Billed monthly
+                                </p>
+                            </td>
+                        ))}
+                    </tr>
+
+                    <!-- Create a unique list of all features from all tiers -->
+                    {(() => {
+                        const allFeatures = new Set();
+                        tiers.forEach(tier => {
+                            tier.features.forEach(feature => {
+                                allFeatures.add(feature.text);
+                            });
+                        });
+
+                        return Array.from(allFeatures).map(featureText => (
+                            <tr class="border-b border-gray-200 dark:border-gray-800">
+                                <td class="py-4 px-6 text-left text-gray-700 dark:text-gray-300">{featureText}</td>
+                                {tiers.map(tier => {
+                                    const feature = tier.features.find(f => f.text === featureText);
+                                    const included = feature ? feature.included : false;
+                                    return (
+                                        <td class="py-4 px-6">
+                                                <span
+                                                    class={`inline-block w-5 h-5 ${included ? 'text-green-500 dark:text-green-400' : 'text-gray-300 dark:text-gray-600'}`}>
+                                                    {included ? (
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                             fill="currentColor">
+                                                            <path fill-rule="evenodd"
+                                                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                  clip-rule="evenodd"/>
+                                                        </svg>
+                                                    ) : (
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                             fill="currentColor">
+                                                            <path fill-rule="evenodd"
+                                                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                                  clip-rule="evenodd"/>
+                                                        </svg>
+                                                    )}
+                                                </span>
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        ));
+                    })()}
+
+                    <tr>
+                        <td class="py-6 px-6"></td>
+            {
+                tiers.map((tier) => (
+                    <td class="py-6 px-6">
+                        <a
+                            href={tier.cta.href}
+                            class={`block w-full py-3 px-6 rounded-md text-center font-medium ${
+                                tier.isPopular
+                                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                                    : 'bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-600'
+                            }`}
+                        >
+                            {tier.cta.text}
+                        </a>
+                    </td>
+                ))
+            }
+            </tr>
+            </tbody>
+            </table>
+            </div>
+            )}
+
+        {/* Modern Card Layout */}
+        {style === 'cards' && (
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {tiers.map((tier) => (
+                    <PricingTierCard
+                        name={tier.name}
+                        description={tier.description}
+                        monthlyPrice={tier.price.monthly}
+                        annualPrice={tier.price.annual}
+                        features={tier.features}
+                        ctaText={tier.cta.text}
+                        ctaHref={tier.cta.href}
+                        isPopular={tier.isPopular}
+                        badge={tier.badge}
+                    />
+                ))}
+            </div>
+        )}
+    </div>
+</section>

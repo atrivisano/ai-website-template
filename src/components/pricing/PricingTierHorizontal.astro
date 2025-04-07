@@ -1,0 +1,94 @@
+---
+/**
+    * PricingTierHorizontal Component
+    * Horizontal layout for a pricing tier
+    */
+
+import PricingFeature from './PricingFeature.astro';
+import PricingPrice from './PricingPrice.astro';
+
+export interface PricingFeatureItem {
+    text: string;
+    included: boolean;
+}
+
+export interface Props {
+    name: string;
+    description?: string;
+    monthlyPrice: string | number;
+    annualPrice: string | number;
+    features: PricingFeatureItem[];
+    ctaText: string;
+    ctaHref: string;
+    isPopular?: boolean;
+    badge?: string;
+    maxFeaturesShown?: number;
+    className?: string;
+}
+
+const {
+    name,
+    description,
+    monthlyPrice,
+    annualPrice,
+    features,
+    ctaText,
+    ctaHref,
+    isPopular = false,
+    badge,
+    maxFeaturesShown = 3,
+    className = ''
+} = Astro.props;
+---
+
+<div
+    class={`pricing-tier rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 ${isPopular ? 'ring-2 ring-blue-500' : ''} ${className}`}>
+    <div class="grid md:grid-cols-4 items-center">
+        <div class="p-6 md:p-8 md:border-r border-gray-200 dark:border-gray-700">
+            {badge && (
+                <div
+                    class="inline-block bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-200 text-xs font-bold uppercase tracking-wider px-2 py-1 rounded-full mb-2">
+                    {badge}
+                </div>
+            )}
+            <h3 class="text-xl font-bold mb-2">{name}</h3>
+            {description && (
+                <p class="text-gray-500 dark:text-gray-400">{description}</p>
+            )}
+        </div>
+        <div class="p-6 md:p-8 md:border-r border-gray-200 dark:border-gray-700">
+            <PricingPrice
+                monthlyPrice={monthlyPrice}
+                annualPrice={annualPrice}
+                size="small"
+            />
+        </div>
+        <div class="p-6 md:p-8 md:border-r border-gray-200 dark:border-gray-700">
+            <ul class="space-y-3">
+                {features.slice(0, maxFeaturesShown).map((feature) => (
+                    <PricingFeature
+                        text={feature.text}
+                        included={feature.included}
+                    />
+                ))}
+                {features.length > maxFeaturesShown && (
+                    <li class="text-sm text-gray-500 dark:text-gray-400 pl-7">+ {features.length - maxFeaturesShown}
+                        more features
+                    </li>
+                )}
+            </ul>
+        </div>
+        <div class="p-6 md:p-8 flex items-center justify-center">
+            <a
+                href={ctaHref}
+                class={`block w-full py-3 px-6 rounded-md text-center font-medium ${
+                    isPopular
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                        : 'bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-600'
+                }`}
+            >
+                {ctaText}
+            </a>
+        </div>
+    </div>
+</div>

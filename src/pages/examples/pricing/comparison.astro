@@ -1,0 +1,171 @@
+---
+// src/pages/examples/pricing/comparison.astro
+import BaseLayout from '../../../layouts/Layout.astro';
+import Header from '../../../components/common/Header.astro';
+import Footer from '../../../components/common/Footer.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import Pricing from '../../../components/sections/Pricing.astro';
+
+// Sample pricing data with detailed features for comparison
+const pricingTiers = [
+    {
+        name: "Basic",
+        price: {
+            monthly: 12,
+            annual: 9.6,  // 20% discount
+        },
+        features: [
+            { text: "5 team members", included: true },
+            { text: "10 projects", included: true },
+            { text: "5GB storage", included: true },
+            { text: "API access", included: false },
+            { text: "Advanced security", included: false },
+            { text: "Customizable workflows", included: false },
+            { text: "Custom reporting", included: false },
+            { text: "Dedicated support", included: false },
+            { text: "Single sign-on (SSO)", included: false },
+            { text: "Custom integrations", included: false }
+        ],
+        cta: {
+            text: "Start with Basic",
+            href: "/signup?plan=basic",
+        },
+    },
+    {
+        name: "Team",
+        badge: "Popular",
+        price: {
+            monthly: 29,
+            annual: 23.2,  // 20% discount
+        },
+        features: [
+            { text: "25 team members", included: true },
+            { text: "Unlimited projects", included: true },
+            { text: "50GB storage", included: true },
+            { text: "API access", included: true },
+            { text: "Advanced security", included: true },
+            { text: "Customizable workflows", included: true },
+            { text: "Custom reporting", included: false },
+            { text: "Dedicated support", included: false },
+            { text: "Single sign-on (SSO)", included: false },
+            { text: "Custom integrations", included: false }
+        ],
+        cta: {
+            text: "Start with Team",
+            href: "/signup?plan=team",
+        },
+        isPopular: true,
+    },
+    {
+        name: "Business",
+        price: {
+            monthly: 79,
+            annual: 63.2,  // 20% discount
+        },
+        features: [
+            { text: "Unlimited team members", included: true },
+            { text: "Unlimited projects", included: true },
+            { text: "500GB storage", included: true },
+            { text: "API access", included: true },
+            { text: "Advanced security", included: true },
+            { text: "Customizable workflows", included: true },
+            { text: "Custom reporting", included: true },
+            { text: "Dedicated support", included: true },
+            { text: "Single sign-on (SSO)", included: true },
+            { text: "Custom integrations", included: true }
+        ],
+        cta: {
+            text: "Start with Business",
+            href: "/signup?plan=business",
+        },
+    },
+];
+---
+
+<BaseLayout title="Feature Comparison Pricing Table">
+    <Header slot="header" />
+
+    <Hero
+        title="Feature Comparison Pricing"
+        subtitle="Component Example"
+        description="A detailed feature-by-feature comparison table for all pricing tiers."
+        height="small"
+    />
+
+    <!-- Example Feature Comparison Pricing Table -->
+    <Pricing
+        title="Compare Features & Plans"
+        description="See exactly what you get with each plan. Choose the one that fits your needs."
+        tiers={pricingTiers}
+        style="comparison"
+        enableToggle={true}
+        withBackground={true}
+    />
+
+    <section class="py-16">
+        <div class="container-custom">
+            <h2 class="text-3xl font-bold mb-6">About This Example</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                This page demonstrates a feature comparison pricing table that allows customers to easily see which features are included in each plan. This format is ideal when you have many features to compare across different pricing tiers.
+            </p>
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4">Key Features:</h3>
+                <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>Table-based layout for easy feature comparison</li>
+                    <li>Monthly/annual billing toggle with discount</li>
+                    <li>Clear visual indicators for included/excluded features</li>
+                    <li>Responsive design that adapts to smaller screens</li>
+                    <li>Organized presentation of many features</li>
+                </ul>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4">Component Code Example:</h3>
+                <pre class="bg-gray-800 text-gray-200 p-4 rounded-lg overflow-x-auto text-sm">
+{`<Pricing
+    title="Compare Features & Plans"
+    description="See exactly what you get with each plan."
+    tiers={pricingTiers}
+    style="comparison"
+    enableToggle={true}
+    withBackground={true}
+/>`}
+                </pre>
+            </div>
+
+            <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+                <p class="text-blue-800 dark:text-blue-200 text-sm">
+                    <strong>Best Practice:</strong> The comparison table layout works best when you have many features to compare. Organize features logically, with the most important or common features at the top. This makes it easier for customers to quickly see the differences between plans.
+                </p>
+            </div>
+
+            <div class="mt-8 p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                <p class="text-yellow-800 dark:text-yellow-200 text-sm">
+                    <strong>Note:</strong> On smaller screens, this table becomes horizontally scrollable to maintain readability while preserving all comparison information.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="container-custom">
+            <div class="flex justify-between items-center">
+                <a href="/examples/pricing/standard" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Previous: Standard Pricing Table
+                </a>
+                <a href="/examples/pricing/horizontal" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+                    Next Example: Horizontal Pricing Table
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>
