@@ -1,11 +1,284 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/Layout.astro';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import { siteConfig } from '../config/site';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+	<Header slot="header" />
+
+	<section class="py-12 md:py-24">
+		<div class="container-custom">
+			<div class="flex flex-col items-center text-center">
+				<h1 class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+					Welcome to <span class="text-blue-600 dark:text-blue-500">Astro</span> with Tailwind CSS
+				</h1>
+				<p class="mt-6 max-w-3xl text-lg text-gray-600 dark:text-gray-400">
+					A high-performing, visually modern website built with Astro and Tailwind CSS.
+					This template uses the default Tailwind configuration for simplicity and maintainability.
+				</p>
+				<div class="mt-10 flex flex-wrap gap-4 justify-center">
+					<a href="/about" class="inline-flex items-center justify-center rounded-md px-6 py-3 font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">Learn More</a>
+					<a href="/contact" class="inline-flex items-center justify-center rounded-md px-6 py-3 font-medium text-gray-700 border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800">Get in Touch</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-12 bg-gray-50 dark:bg-gray-800">
+		<div class="container-custom">
+			<h2 class="text-3xl font-bold text-center mb-12">Features</h2>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<!-- Feature 1 -->
+				<div class="card p-6">
+					<div class="h-12 w-12 rounded-md bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-2">Lightning Fast</h3>
+					<p class="text-gray-600 dark:text-gray-400">
+						Built with Astro's partial hydration model for optimal performance.
+						JavaScript is only loaded where needed.
+					</p>
+				</div>
+
+				<!-- Feature 2 -->
+				<div class="card p-6">
+					<div class="h-12 w-12 rounded-md bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-2">Utility-First CSS</h3>
+					<p class="text-gray-600 dark:text-gray-400">
+						Tailwind's utility classes enable rapid UI development without the
+						need for custom CSS.
+					</p>
+				</div>
+
+				<!-- Feature 3 -->
+				<div class="card p-6">
+					<div class="h-12 w-12 rounded-md bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold mb-2">Fully Accessible</h3>
+					<p class="text-gray-600 dark:text-gray-400">
+						Built with a focus on accessibility, ensuring a great experience for all users.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Testimonials Section -->
+	<section class="py-16 bg-gray-50 dark:bg-gray-800">
+		<div class="container-custom">
+			<div class="text-center mb-10">
+				<h2 class="text-3xl font-bold">What Our Users Say</h2>
+				<p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+					Hear from developers and designers who've built amazing projects with our stack.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<!-- Testimonial 1 -->
+				<div class="card p-6">
+					<div class="flex items-center mb-4">
+						<div class="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
+							<span class="text-blue-600 dark:text-blue-400 font-bold">JD</span>
+						</div>
+						<div>
+							<h4 class="font-bold">Jane Doe</h4>
+							<p class="text-sm text-gray-600 dark:text-gray-400">Frontend Developer</p>
+						</div>
+					</div>
+					<div class="mb-3 flex text-yellow-400">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400">
+						"Astro with Tailwind has transformed how I build websites. The load times are incredibly fast, and the development experience is unmatched."
+					</p>
+				</div>
+
+				<!-- Testimonial 2 -->
+				<div class="card p-6">
+					<div class="flex items-center mb-4">
+						<div class="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
+							<span class="text-blue-600 dark:text-blue-400 font-bold">JS</span>
+						</div>
+						<div>
+							<h4 class="font-bold">John Smith</h4>
+							<p class="text-sm text-gray-600 dark:text-gray-400">UX Designer</p>
+						</div>
+					</div>
+					<div class="mb-3 flex text-yellow-400">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400">
+						"The utility-first approach of Tailwind makes designing responsive interfaces a breeze. Combined with Astro's speed, it's the perfect stack."
+					</p>
+				</div>
+
+				<!-- Testimonial 3 -->
+				<div class="card p-6">
+					<div class="flex items-center mb-4">
+						<div class="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
+							<span class="text-blue-600 dark:text-blue-400 font-bold">AL</span>
+						</div>
+						<div>
+							<h4 class="font-bold">Alex Lee</h4>
+							<p class="text-sm text-gray-600 dark:text-gray-400">Full Stack Developer</p>
+						</div>
+					</div>
+					<div class="mb-3 flex text-yellow-400">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+						</svg>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400">
+						"I've cut my development time in half since switching to this stack. The performance benefits alone are worth making the switch."
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Stats Section -->
+	<section class="py-16">
+		<div class="container-custom">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+				<!-- Stat 1 -->
+				<div class="p-6">
+					<div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">100%</div>
+					<p class="text-lg font-medium">Lighthouse Score</p>
+					<p class="text-gray-600 dark:text-gray-400">Perfect performance metrics</p>
+				</div>
+
+				<!-- Stat 2 -->
+				<div class="p-6">
+					<div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">1.5x</div>
+					<p class="text-lg font-medium">Development Speed</p>
+					<p class="text-gray-600 dark:text-gray-400">Faster than traditional stacks</p>
+				</div>
+
+				<!-- Stat 3 -->
+				<div class="p-6">
+					<div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">90%</div>
+					<p class="text-lg font-medium">Less JavaScript</p>
+					<p class="text-gray-600 dark:text-gray-400">Compared to client-side frameworks</p>
+				</div>
+
+				<!-- Stat 4 -->
+				<div class="p-6">
+					<div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">5K+</div>
+					<p class="text-lg font-medium">Developers</p>
+					<p class="text-gray-600 dark:text-gray-400">Building with Astro & Tailwind</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ Section -->
+	<section class="py-16 bg-gray-50 dark:bg-gray-800">
+		<div class="container-custom">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
+				<p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+					Find answers to common questions about our Astro and Tailwind stack.
+				</p>
+			</div>
+
+			<div class="max-w-3xl mx-auto space-y-6">
+				<!-- FAQ Item -->
+				<div class="card p-6">
+					<h3 class="text-xl font-bold mb-3">What is Astro?</h3>
+					<p class="text-gray-600 dark:text-gray-400">
+						Astro is a modern static site builder that delivers lightning-fast performance by shipping zero JavaScript by default. It allows you to use your favorite UI components from React, Vue, Svelte, and more while enjoying the benefits of static site generation.
+					</p>
+				</div>
+
+				<!-- FAQ Item -->
+				<div class="card p-6">
+					<h3 class="text-xl font-bold mb-3">Why use Tailwind CSS?</h3>
+					<p class="text-gray-600 dark:text-gray-400">
+						Tailwind CSS is a utility-first CSS framework that allows you to build custom designs without writing custom CSS. It provides low-level utility classes that let you build completely custom designs without ever leaving your HTML.
+					</p>
+				</div>
+
+				<!-- FAQ Item -->
+				<div class="card p-6">
+					<h3 class="text-xl font-bold mb-3">Is this stack suitable for large applications?</h3>
+					<p class="text-gray-600 dark:text-gray-400">
+						Absolutely! Astro's island architecture makes it perfect for content-focused sites of any size, while Tailwind's utility-first approach scales well with larger codebases. The combination provides exceptional performance and developer experience for projects of all sizes.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Final CTA Section -->
+	<section class="py-16 bg-blue-600 dark:bg-blue-700 text-white">
+		<div class="container-custom">
+			<div class="text-center mb-10">
+				<h2 class="text-3xl font-bold">Get Started Today</h2>
+				<p class="mt-4 text-lg text-blue-100 max-w-2xl mx-auto">
+					Start building your next project with this clean and modern template.
+					Enhance your development workflow and create better user experiences.
+				</p>
+			</div>
+
+			<div class="flex justify-center">
+				<a href="#" class="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 text-lg font-medium rounded-md transition-colors duration-200">
+					Get Started
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<Footer slot="footer" />
+</BaseLayout>

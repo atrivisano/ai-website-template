@@ -1,0 +1,174 @@
+---
+import { siteConfig } from '../../config/site';
+
+// Define props with TypeScript
+interface Props {
+    isTransparent?: boolean;
+}
+
+// Destructure props with defaults
+const { isTransparent = false } = Astro.props;
+
+// Get current path for active link highlighting
+const currentPath = Astro.url.pathname;
+---
+
+<header
+    class:list={[
+        'sticky top-0 z-40 w-full transition-colors duration-300',
+        isTransparent
+            ? 'bg-transparent'
+            : 'bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 backdrop-blur-sm bg-opacity-90 dark:bg-opacity-90'
+    ]}
+>
+    <div class="container-custom">
+        <div class="flex h-16 items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="/" class="flex items-center space-x-2" aria-label={siteConfig.name}>
+                    <!-- Replace with your actual logo SVG or image -->
+                    <svg class="h-8 w-8 text-primary-600 dark:text-primary-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" />
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span class="font-bold text-xl hidden sm:inline-block">{siteConfig.name}</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                {siteConfig.mainNav.map((item) => {
+                    const isActive = currentPath === item.href ||
+                        (item.href !== '/' && currentPath.startsWith(item.href));
+
+                    return (
+                        <a
+                            href={item.href}
+                            class:list={[
+                                'text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400',
+                                isActive
+                                    ? 'text-primary-600 dark:text-primary-400'
+                                    : 'text-gray-700 dark:text-gray-300'
+                            ]}
+                            aria-current={isActive ? 'page' : undefined}
+                        >
+                            {item.title}
+                        </a>
+                    );
+                })}
+            </nav>
+
+            <!-- Right side actions -->
+            <div class="flex items-center space-x-4">
+                <!-- Dark mode toggle -->
+                <button
+                    id="theme-toggle"
+                    type="button"
+                    class="rounded-md p-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    aria-label="Toggle dark mode"
+                >
+                    <!-- Sun icon for dark mode (shown when in dark mode) -->
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 dark:hidden"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                    >
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                    <!-- Moon icon for light mode (shown when in light mode) -->
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 hidden dark:block"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            clip-rule="evenodd"
+                        />
+                    </svg>
+                </button>
+
+                <!-- Mobile menu toggle (shown only on mobile) -->
+                <button
+                    id="mobile-menu-toggle"
+                    type="button"
+                    class="md:hidden rounded-md p-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    aria-expanded="false"
+                    aria-label="Toggle mobile menu"
+                >
+                    <!-- Hamburger icon -->
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"
+                        />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile menu (hidden by default) -->
+    <div
+        id="mobile-menu"
+        class="hidden md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900"
+    >
+        <div class="container-custom py-4 space-y-3">
+            {siteConfig.mainNav.map((item) => {
+                const isActive = currentPath === item.href ||
+                    (item.href !== '/' && currentPath.startsWith(item.href));
+
+                return (
+                    <a
+                        href={item.href}
+                        class:list={[
+                            'block py-2 px-3 text-base font-medium rounded-md transition-colors hover:bg-gray-100 dark:hover:bg-gray-800',
+                            isActive
+                                ? 'text-primary-600 dark:text-primary-400 bg-gray-50 dark:bg-gray-800'
+                                : 'text-gray-700 dark:text-gray-300'
+                        ]}
+                        aria-current={isActive ? 'page' : undefined}
+                    >
+                        {item.title}
+                    </a>
+                );
+            })}
+        </div>
+    </div>
+</header>
+
+<script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+    }
+
+    // Mobile menu toggle functionality
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+</script>

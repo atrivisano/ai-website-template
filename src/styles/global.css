@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* Base styles */
+@layer base {
+    /* Custom styles that should be applied before Tailwind's utilities */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+        font-feature-settings: "kern";
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold tracking-tight;
+    }
+
+    h1 {
+        @apply text-4xl md:text-5xl lg:text-6xl;
+    }
+
+    h2 {
+        @apply text-3xl md:text-4xl;
+    }
+
+    h3 {
+        @apply text-2xl md:text-3xl;
+    }
+
+    h4 {
+        @apply text-xl md:text-2xl;
+    }
+
+    a {
+        @apply text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300;
+        @apply transition-colors duration-200;
+    }
+
+    img, svg {
+        @apply max-w-full h-auto;
+    }
+}
+
+/* Common component classes (using @apply for reusability) */
+@layer components {
+    .container-custom {
+        @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .card {
+        @apply bg-white rounded-lg shadow dark:bg-gray-800 overflow-hidden transition-shadow duration-300 hover:shadow-md;
+    }
+}
+
+/* Custom utilities beyond what Tailwind provides */
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    .text-pretty {
+        text-wrap: pretty;
+    }
+}
+
+/* We can define any CSS that won't be handled by Tailwind here */

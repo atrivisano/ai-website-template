@@ -1,22 +1,111 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+// Import site config
+import {siteConfig} from '../config/site';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+// Import global styles
+import '../styles/global.css';
+
+// Define props with TypeScript
+interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    canonicalUrl?: string;
+}
+
+// Destructure props with defaults
+const {
+    title = siteConfig.defaultTitle,
+    description = siteConfig.description,
+    image = siteConfig.ogImage,
+    canonicalUrl,
+} = Astro.props;
+
+// Generate full title using template
+const fullTitle = title === siteConfig.defaultTitle
+    ? title
+    : siteConfig.titleTemplate.replace('%s', title);
+
+// Generate canonical URL
+const canonical = new URL(canonicalUrl || Astro.url.pathname, siteConfig.url);
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle}/>
+    <meta name="description" content={description}/>
+    <link rel="canonical" href={canonical}/>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content={canonical}/>
+    <meta property="og:title" content={fullTitle}/>
+    <meta property="og:description" content={description}/>
+    <meta property="og:image" content={new URL(image, siteConfig.url)}/>
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:url" content={canonical}/>
+    <meta property="twitter:title" content={fullTitle}/>
+    <meta property="twitter:description" content={description}/>
+    <meta property="twitter:image" content={new URL(image, siteConfig.url)}/>
+
+    <!-- Font preloads -->
+    <link
+        rel="preload"
+        href="/fonts/Inter-Variable.woff2"
+        as="font"
+        type="font/woff2"
+        crossorigin
+    />
+
+    <!-- Dark mode script (to prevent flashing) -->
+    <script is:inline>
+        // Check for dark mode preference
+        const theme = (() => {
+            if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                return localStorage.getItem('theme');
+            }
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        })();
+
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-50 antialiased">
+<!-- Skip to content link for accessibility -->
+<a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-primary-500 focus:text-white focus:z-50"
+>
+    Skip to content
+</a>
+
+<!-- Header will be included here -->
+<slot name="header"/>
+
+<!-- Main content -->
+<main id="main-content" class="flex-1">
+    <slot/>
+</main>
+
+<!-- Footer will be included here -->
+<slot name="footer"/>
+</body>
+</html>
